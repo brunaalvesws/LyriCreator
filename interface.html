@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
 
@@ -27,7 +28,7 @@
                <option value="pdf">João Gomes</option>
                <option value="txt">AnaVitória</option>
                <option value="epub">Vanessa da Mata</option>
-               <option value="fb2">Luiza Sonza</option>
+               <option value="fb2">Adriana Calcanhotto</option>
                <option value="mobi">Zeca Pagodinho</option>
             </select>
          </div>
@@ -38,92 +39,56 @@
                <option value="pdf">João Gomes</option>
                <option value="txt">AnaVitória</option>
                <option value="epub">Vanessa da Mata</option>
-               <option value="fb2">Luiza Sonza</option>
+               <option value="fb2">Adriana Calcanhotto</option>
                <option value="mobi">Zeca Pagodinho</option>
             </select>
          </div>
          <div class="col-1"></div>
     </div>
+    <div class="row" style="text-align: center; justify-content: center; padding-top: 30px;">
+      <div class="meu-select col-4" id="mistura">
+          <select name="format" id="format">
+             <option selected disabled>Grau de mistura</option>
+             <option value="pdf">Muito misturado</option>
+             <option value="txt">Pouco misturado</option>
+          </select>
+       </div>
+  </div>
     <div style="text-align: center; font-size: 25px; padding-top: 80px;">
       <p>Veja abaixo o resultado:</p>
    </div>
-   <div style="justify-content: center; display: flex;">
+   <div style="justify-content: center; display: flex; visibility: hidden;" id="result">
    <div class="card" style="max-width: 50%;">
       <div class="card-header" style=" text-align: center;">Nome da Música</div>
       <div class="card-body">Avião sem asa<br>
-         Fogueira sem brasa<br>
-         Sou eu assim sem você<br>
-         Futebol sem bola<br>
-         Piu-Piu sem Frajola<br>
-         Sou eu assim sem você<br>
+         Não to apé quem vai<br>
+         Guarujá, hotel beira-mar. Copacabana, Rio de praia,<br>
+         Queijo, sem você Por quê?<br>
+         Guarujá, hotel beira-mar. Copacabana, Rio de<br>
+         Piu-Piu sem você Carro sem <br>
+         Perfume Two and Two and <br>
          <br>
-         Por que é que tem que ser assim<br>
-         Se o meu desejo não tem fim?<br>
-         Eu te quero a todo instante<br>
-         Nem mil alto-falantes<br>
-         Vão poder falar por mim<br>
+         Guarujá, hotel beira-mar. Copacabana, Rio de mal<br>
+         Vai pro baile só pra<br>
+         Elas tem que ser assim<br>
+         Carro sem você Tô louco<br>
+         Sente o chão. Usa dolce<br>
+         Futebol sem você Futebol sem<br>
          <br>
-         Amor sem beijinho<br>
-         Buchecha sem Claudinho<br>
-         Sou eu assim sem você<br>
-         Circo sem palhaço<br>
-         Namoro sem abraço<br>
-         Sou eu assim sem você<br>
-         <br>
-         Tô louco pra te ver chegar<br>
-         Tô louco pra te ter nas mãos<br>
-         Deitar no teu abraço<br>
-         Retomar o pedaço<br>
-         Que falta no meu coração<br>
-         <br>
-         Eu não existo longe de você<br>
-         E a solidão é o meu pior castigo<br>
-         Eu conto as horas pra poder te ver<br>
-         Mas o relógio tá de mal comigo<br>
-         <br>
-         Eu não existo longe de você<br>
-         E a solidão é o meu pior castigo<br>
-         Eu conto as horas pra poder te ver<br>
-         Mas o relógio tá de mal comigo<br>
-         Por quê? Por quê?<br>
-         <br>
-         Neném sem chupeta<br>
-         Romeu sem Julieta<br>
-         Sou eu assim sem você<br>
-         Carro sem estrada<br>
-         Queijo sem goiabada<br>
-         Sou eu assim sem você, você<br>
-         <br>
-         Por que é que tem que ser assim<br>
-         Se o meu desejo não tem fim?<br>
-         Eu te quero a todo instante<br>
-         Nem mil alto-falantes<br>
-         Vão poder falar por mim<br>
-         <br>
-         Eu não existo longe de você<br>
-         E a solidão é o meu pior castigo<br>
-         Eu conto as horas pra poder te ver<br>
-         Mas o relógio tá de mal comigo<br>
-         <br>
-         Eu não existo longe de você<br>
-         E a solidão é o meu pior castigo<br>
-         Eu conto as horas pra poder te ver<br>
-         Mas o relógio tá de mal comigo<br>
-         Por quê, neném? Por quê?<br>
-         <br>
-         (Iê, iê)<br>
-         Eu não existo longe de você<br>
-         E a solidão é o meu pior castigo<br>
-         Eu conto as horas pra poder te ver<br>
-         Mas o relógio tá de mal comigo<br>
-         <br>
-         Eu não existo longe de você<br>
-         E a solidão é o meu pior castigo<br>
-         Eu conto as horas pra poder te ver<br>
-         Mas o relógio tá de mal comigo<br>
-         Por quê? Por quê?</div>
       </div>
    </div>
 </div>
 </body>
 </html>
+
+<script>
+   $(document).ready(function () {
+      console.log('inicio')
+      const selectElement = document.querySelector('#mistura');
+
+      selectElement.addEventListener('change', (event) => {
+         console.log('mudei')
+         document.getElementById('result').style.visibility = 'visible';
+      });
+   }) 
+</script>
