@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LyriCreator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="card-header" style="font-family: Handlee, cursive; font-size: 60px; background-color: rgb(165, 209, 195);">LyriCreator</div>
+
+<div class="card-body">
+    <div style="text-align: center; font-size: 25px;"><p>Seja bem-vindo ao LyriCreator, uma plataforma que te ajudar a criar letras de música!</p>
+    <p>Aqui, você pode escolher outros artistas para combinar seus estilos e criar uma nova letra de música baseada nas influências musicais escolhidas.</p>
+    </div>
+    <br>
+    <form action="{% url 'index' %}" method="post">
+    <div class="row" style="text-align: center;">
+        <div class="col-1"></div>
+        <div class="meu-select col-4">
+            <select name="format" id="format">
+               <option selected disabled>Escolha uma opção</option>
+               <option value="pdf">João Gomes</option>
+               <option value="txt">AnaVitória</option>
+               <option value="epub">MC Daleste</option>
+               <option value="fb2">Adriana Calcanhotto</option>
+               <option value="mobi">Zeca Pagodinho</option>
+            </select>
+         </div>
+         <div class="col-2"></div>
+         <div class="meu-select col-4">
+            <select name="format" id="format">
+               <option selected disabled>Escolha uma segunda opção</option>
+               <option value="pdf">João Gomes</option>
+               <option value="txt">AnaVitória</option>
+               <option value="epub">MC Daleste</option>
+               <option value="fb2">Adriana Calcanhotto</option>
+               <option value="mobi">Zeca Pagodinho</option>
+            </select>
+         </div>
+         <div class="col-1"></div>
+    </div>
+    <div class="row" style="text-align: center; justify-content: center; padding-top: 30px;">
+      <div class="meu-select col-4" id="mistura">
+          <select name="format" id="format">
+             <option selected disabled>Grau de mistura</option>
+             <option value="pdf">Muito misturado</option>
+             <option value="txt">Pouco misturado</option>
+          </select>
+       </div>
+   </div>
+   </form>
+   <div id="resultado">
+   </div>
+</div>
+</body>
+</html>
+
+<script>
+   $(document).ready(function () {
+      console.log('inicio')
+      const selectElement = document.querySelector('#mistura');
+
+      selectElement.addEventListener('change', (event) => {
+         console.log('mudei')
+         document.getElementById('result').style.visibility = 'visible';
+      });
+   }) 
+</script>
+
+<style>
+   select {
+   -webkit-appearance:none;
+   -moz-appearance:none;
+   -ms-appearance:none;
+   appearance:none;
+   outline:0;
+   box-shadow:none;
+   border:0!important;
+   background: #91b8b0;
+   background-image: none;
+   flex: 1;
+   padding: 0 .5em;
+   color:#fff;
+   cursor:pointer;
+   font-size: 1em;
+   font-family: 'Open Sans', sans-serif;
+   }
+   select::-ms-expand {
+   display: none;
+   }
+   .meu-select {
+   position: relative;
+   display: flex;
+   width: 20em;
+   height: 3em;
+   line-height: 3;
+   background: #91b8b0;
+   overflow: hidden;
+   border-radius: .25em;
+   }
+   .meu-select::after {
+   content: '\25BC';
+   position: absolute;
+   top: 0;
+   right: 0;
+   padding: 0 1em;
+   background: #d7f0f0;
+   cursor:pointer;
+   pointer-events:none;
+   transition:.25s all ease;
+   }
+   .meu-select:hover::after {
+   color: #23b499;
+   }
+</style>
