@@ -19,40 +19,45 @@
     <p>Aqui, você pode escolher outros artistas para combinar seus estilos e criar uma nova letra de música baseada nas influências musicais escolhidas.</p>
     </div>
     <br>
-    <form action="{% url 'index' %}" method="post">
+    <form action="{% url 'index' %}" method="post" id="choose-artist">{% csrf_token %}
     <div class="row" style="text-align: center;">
         <div class="col-1"></div>
         <div class="meu-select col-4">
-            <select name="format" id="format">
+            <select name="artist1" id="format" form="choose-artist">
                <option selected disabled>Escolha uma opção</option>
-               <option value="pdf">João Gomes</option>
-               <option value="txt">AnaVitória</option>
-               <option value="epub">MC Daleste</option>
-               <option value="fb2">Adriana Calcanhotto</option>
-               <option value="mobi">Zeca Pagodinho</option>
+               <option value="joao_gomes">João Gomes</option>
+               <option value="anavitoria">AnaVitória</option>
+               <option value="MCdaleste">MC Daleste</option>
+               <option value="adriana_calcanhotto">Adriana Calcanhotto</option>
+               <option value="zeca_pagodinho">Zeca Pagodinho</option>
             </select>
          </div>
          <div class="col-2"></div>
          <div class="meu-select col-4">
-            <select name="format" id="format">
+            <select name="artist2" id="format" form="choose-artist">
                <option selected disabled>Escolha uma segunda opção</option>
-               <option value="pdf">João Gomes</option>
-               <option value="txt">AnaVitória</option>
-               <option value="epub">MC Daleste</option>
-               <option value="fb2">Adriana Calcanhotto</option>
-               <option value="mobi">Zeca Pagodinho</option>
+               <option value="joao_gomes">João Gomes</option>
+               <option value="anavitoria">AnaVitória</option>
+               <option value="MCdaleste">MC Daleste</option>
+               <option value="adriana_calcanhotto">Adriana Calcanhotto</option>
+               <option value="zeca_pagodinho">Zeca Pagodinho</option>
             </select>
          </div>
          <div class="col-1"></div>
     </div>
     <div class="row" style="text-align: center; justify-content: center; padding-top: 30px;">
       <div class="meu-select col-4" id="mistura">
-          <select name="format" id="format">
+          <select name="mistura" id="format" form="choose-artist">
              <option selected disabled>Grau de mistura</option>
-             <option value="pdf">Muito misturado</option>
-             <option value="txt">Pouco misturado</option>
+             <option value="muito">Muito misturado</option>
+             <option value="pouco">Pouco misturado</option>
           </select>
        </div>
+   </div>
+   <div class="row" style="text-align: center; justify-content: center; padding-top: 20px;">
+      <button id="botao" class="btn btn-success">
+         Vamos lá!
+      </button>
    </div>
    </form>
    <div id="resultado">
@@ -63,14 +68,21 @@
 
 <script>
    $(document).ready(function () {
-      console.log('inicio')
-      const selectElement = document.querySelector('#mistura');
 
-      selectElement.addEventListener('change', (event) => {
-         console.log('mudei')
-         document.getElementById('result').style.visibility = 'visible';
-      });
-   }) 
+      $("#botao").on('click', function (e) {
+         e.preventDefault();
+         var form = $(this).closest('form');
+         $.ajax({
+                url: form.attr("action"),
+                data: form.serialize(),
+                type: form.attr("method"),
+                dataType: 'json',
+                success: function (data) {
+                  $("#resultado").html(data.result);
+                }
+         })
+      }) 
+   });
 </script>
 
 <style>
