@@ -5,7 +5,9 @@
     <div class="card" style="max-width: 50%;">
        <div class="card-header" style=" text-align: center;">Nova música</div>
        <div class="card-body">
-          {{ resultado }}
+          {% for line in resultado %}
+            <p>{{ line }}</p>
+          {% endfor %}
        </div>
     </div>
  </div>
