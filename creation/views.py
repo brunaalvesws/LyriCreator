@@ -32,7 +32,6 @@ class index(View):
             return BeautifulSoup(resposta.text, "html.parser")
         return None
 
-
     def obtem_pagina_musica(self,link,MUSIC_SOURCE):
         url_musica = f"{MUSIC_SOURCE}{link}"
         resposta = req.get(url_musica)
@@ -40,12 +39,10 @@ class index(View):
             return BeautifulSoup(resposta.text, "html.parser")
         return None
 
-
     def checa_resposta(self,resposta_requests):
         if resposta_requests.status_code != 200:
             return False
         return True
-
 
     def obtem_titulo_musica(self,pagina_musica):
         try:
@@ -54,7 +51,6 @@ class index(View):
         except AttributeError as e:
             titulo_musica = "NA"
         return titulo_musica
-
 
     def obtem_letra_musica(self,pagina_musica):
         tags_musica = pagina_musica.find("div", {"class": "cnt-letra"})
@@ -80,39 +76,43 @@ class index(View):
 
             temporario = ""
             for autor in AUTORES:
-                print(f"\nMinerando musicas de: {autor}")
+                    print(f"\nMinerando musicas de: {autor}")
 
-                pagina_autor = self.obtem_pagina_autor(autor,MUSIC_SOURCE)
-                lista_musicas = pagina_autor.find("ol", {"class":"cnt-list"}).findAll("li")
+                    pagina_autor = self.obtem_pagina_autor(autor,MUSIC_SOURCE)
+                    lista_musicas = pagina_autor.find("ol", {"class":"cnt-list"}).findAll("li")
 
-                for musica in lista_musicas:
-                    a_musica = musica.find("a")
+                    for musica in lista_musicas:
+                        try:
+                            a_musica = musica.find("a")
 
-                    if "href" in a_musica.attrs:
-                        link = a_musica.attrs['href'] # obtem o link para musica
-                        
-                        print(f"{MUSIC_SOURCE}{link}")
-                        pagina_musica = self.obtem_pagina_musica(link, MUSIC_SOURCE)
-                        titulo_musica = self.obtem_titulo_musica(pagina_musica)
-                        letra_musica = self.obtem_letra_musica(pagina_musica)
-                        if letra_musica != None:
-                            temporario += self.normaliza_string(letra_musica)+"\n"
-                        print(f"Musica: {titulo_musica} copiada.")
+                            if "href" in a_musica.attrs:
+                                link = a_musica.attrs['href'] # obtem o link para musica
+                                
+                                print(f"{MUSIC_SOURCE}{link}")
+                                pagina_musica = self.obtem_pagina_musica(link, MUSIC_SOURCE)
+                                titulo_musica = self.obtem_titulo_musica(pagina_musica)
+                                letra_musica = self.obtem_letra_musica(pagina_musica)
+                                if letra_musica != None:
+                                    temporario += self.normaliza_string(letra_musica)+"\n"
+                                print(f"Musica: {titulo_musica} copiada.")
 
-                        file.writelines(temporario)
-
-        artistas = AUTORES
+                                file.writelines(temporario)
+                        except:
+                            pass
 
         with open("dataset.txt") as f:
             text = f.read()
 
+        open('dataset.txt', 'w').close()
         # Cria o modelo
         text_model = markovify.NewlineText(text)
-
+ 
         final_result = ''
         for i in range(20):
-            final_result += text_model.make_sentence(tries=20)
-            final_result += "\n"
+            verso = text_model.make_sentence(tries=30)
+            if verso != None:
+                final_result += verso
+                final_result += "\n"
 
         data = {}
         template_name = 'creation/result.html'

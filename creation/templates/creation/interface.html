@@ -27,9 +27,13 @@
                <option selected disabled>Escolha uma opção</option>
                <option value="joao-gomes">João Gomes</option>
                <option value="anavitoria">AnaVitória</option>
-               <option value="mcdaleste">MC Daleste</option>
+               <option value="luiza-sonza">Luiza Sonza</option>
                <option value="adriana-calcanhotto">Adriana Calcanhotto</option>
                <option value="zeca-pagodinho">Zeca Pagodinho</option>
+               <option value="iza">Iza</option>
+               <option value="gloria-groove">Glória Groove</option>
+               <option value="luiz-gonzaga">Luiz Gonzaga</option>
+               <option value="falamansa">Falamansa</option>
             </select>
          </div>
          <div class="col-2"></div>
@@ -38,9 +42,13 @@
                <option selected disabled>Escolha uma segunda opção</option>
                <option value="joao-gomes">João Gomes</option>
                <option value="anavitoria">AnaVitória</option>
-               <option value="mcdaleste">MC Daleste</option>
+               <option value="luiza-sonza">Luiza Sonza</option>
                <option value="adriana-calcanhotto">Adriana Calcanhotto</option>
                <option value="zeca-pagodinho">Zeca Pagodinho</option>
+               <option value="iza">Iza</option>
+               <option value="gloria-groove">Glória Groove</option>
+               <option value="luiz-gonzaga">Luiz Gonzaga</option>
+               <option value="falamansa">Falamansa</option>
             </select>
          </div>
          <div class="col-1"></div>
@@ -55,9 +63,14 @@
        </div>
    </div>
    <div class="row" style="text-align: center; justify-content: center; padding-top: 20px;">
-      <button id="botao" class="btn btn-success">
-         Vamos lá!
-      </button>
+      <div class="col-2" style="justify-content: center;">
+         <button id="botao" class="btn btn-success">
+            Vamos lá!
+         </button>
+         <div id="animation" style="justify-content: center; visibility: hidden; display: flex;">
+            <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+         </div>
+      </div>
    </div>
    </form>
    <div id="resultado">
@@ -70,6 +83,8 @@
    $(document).ready(function () {
 
       $("#botao").on('click', function (e) {
+         document.getElementById("botao").style.visibility = "hidden";
+         document.getElementById("animation").style.visibility = "visible";
          e.preventDefault();
          var form = $(this).closest('form');
          $.ajax({
@@ -78,6 +93,8 @@
                 type: form.attr("method"),
                 dataType: 'json',
                 success: function (data) {
+                  document.getElementById("animation").style.visibility = "hidden";
+                  document.getElementById("botao").style.visibility = "visible";
                   $("#resultado").html(data.result);
                 }
          })
@@ -129,5 +146,83 @@
    }
    .meu-select:hover::after {
    color: #23b499;
+   }
+   .lds-spinner {
+   color: official;
+   display: inline-block;
+   position: relative;
+   width: 80px;
+   height: 40px;
+   }
+   .lds-spinner div {
+   transform-origin: 40px 40px;
+   animation: lds-spinner 1.2s linear infinite;
+   }
+   .lds-spinner div:after {
+   content: " ";
+   display: block;
+   position: absolute;
+   top: 3px;
+   left: 37px;
+   width: 6px;
+   height: 18px;
+   border-radius: 20%;
+   background: rgb(4, 255, 192);
+   }
+   .lds-spinner div:nth-child(1) {
+   transform: rotate(0deg);
+   animation-delay: -1.1s;
+   }
+   .lds-spinner div:nth-child(2) {
+   transform: rotate(30deg);
+   animation-delay: -1s;
+   }
+   .lds-spinner div:nth-child(3) {
+   transform: rotate(60deg);
+   animation-delay: -0.9s;
+   }
+   .lds-spinner div:nth-child(4) {
+   transform: rotate(90deg);
+   animation-delay: -0.8s;
+   }
+   .lds-spinner div:nth-child(5) {
+   transform: rotate(120deg);
+   animation-delay: -0.7s;
+   }
+   .lds-spinner div:nth-child(6) {
+   transform: rotate(150deg);
+   animation-delay: -0.6s;
+   }
+   .lds-spinner div:nth-child(7) {
+   transform: rotate(180deg);
+   animation-delay: -0.5s;
+   }
+   .lds-spinner div:nth-child(8) {
+   transform: rotate(210deg);
+   animation-delay: -0.4s;
+   }
+   .lds-spinner div:nth-child(9) {
+   transform: rotate(240deg);
+   animation-delay: -0.3s;
+   }
+   .lds-spinner div:nth-child(10) {
+   transform: rotate(270deg);
+   animation-delay: -0.2s;
+   }
+   .lds-spinner div:nth-child(11) {
+   transform: rotate(300deg);
+   animation-delay: -0.1s;
+   }
+   .lds-spinner div:nth-child(12) {
+   transform: rotate(330deg);
+   animation-delay: 0s;
+   }
+   @keyframes lds-spinner {
+   0% {
+      opacity: 1;
+   }
+   100% {
+      opacity: 0;
+   }
    }
 </style>
