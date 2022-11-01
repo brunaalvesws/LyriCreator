@@ -66,7 +66,6 @@ class index(View):
     def post(self, request, *args, **kwargs):
         artista1 = request.POST.get('artist1')
         artista2 = request.POST.get('artist2')
-        mistura = request.POST.get('mistura')
 
         MUSIC_SOURCE = "https://www.letras.mus.br"
         AUTORES = [artista1, artista2]
